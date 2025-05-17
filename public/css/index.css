@@ -1,0 +1,49 @@
+body{
+    background-color:black;
+}
+#Feed{
+    color: white;
+    font-size: 25px;
+    font-weight: 500;
+    background-color:black;
+    text-align: center;
+}
+.k{
+    transition: ease all 1s;
+}
+.k:hover{
+    cursor: pointer;
+    scale: 1.05;
+    transition: ease all 1s;
+}
+#nav,#os,#as,#ru{
+    background-color:#ffc107;
+}
+.alert1{
+    color: green;
+}
+.alert2{
+    color: red;
+}
+#foot{
+    background-color: black;
+}
+#FeedBtn{
+    color: white;
+    background-color: black;
+}
+  
+  #goToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FFC107;
+    border-radius: 50%;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  

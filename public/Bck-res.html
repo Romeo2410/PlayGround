@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script>
+       let mymodule= angular.module("myModuleKuch",[]);
+       let myController=mymodule.controller("myControllerKuch",function($scope,$http)
+       {
+        $scope.jsonAry=[];
+        $scope.doFetchAll=function()
+        {
+            let url="/all-records";
+            $http.get(url).then(fxSuccess,fxFail);
+
+            function fxSuccess(response)
+            {
+                //alert(JSON.stringify(response.data));
+                $scope.jsonAry=response.data;
+            }
+            function fxFail(err)
+            {
+                alert(err.data);
+            }
+        }
+
+        $scope.jsonAry=[];
+        $scope.doBlock=function(email)
+        {
+            // alert();
+            let url="/doBlock?emailKuch="+email;
+            $http.get(url).then(fxSuccess,fxFail);
+
+            function fxSuccess(response)
+            {
+                $scope.doFetchAll();
+            //   alert(JSON.stringify(response.data));
+                //$scope.jsonAry=response.data;
+            }
+            function fxFail(err)
+            {
+                alert(err.data);
+            }
+        }
+
+        $scope.jsonAry=[];
+        $scope.doResume=function(email)
+        {
+        
+            let url="/Resume?emailKuch="+email;
+            $http.get(url).then(fxSuccess,fxFail);
+
+            function fxSuccess(response)
+            {
+                $scope.doFetchAll();
+                 //alert(JSON.stringify(response.data));
+                // $scope.jsonAry=response.data;
+            }
+            function fxFail(err)
+            {
+                alert(err.data);
+            }
+        }
+           
+
+       })
+    </script>
+</head>
+
+<body ng-app="myModuleKuch" ng-controller="myControllerKuch" ng-init="doFetchAll();">
+       
+        <br>
+
+        <center><h2><b>All Users </b></h2></center><br>
+
+    <div class="container mx-auto row">
+        <div class="card col-md-4 p-4" ng-repeat="obj in jsonAry">
+             <span><b>Emailid :</b> {{obj.emailid}}</span>
+             <span><b>Utype :</b> {{obj.utype}}</span>
+             <span><b>Status :</b> {{obj.status}}</span>
+             <span><b>Emailid :</b> {{obj.emailid}}</span>
+             <div class="mt-3">
+             <a href="#" class="btn  btn-danger" ng-click="doBlock(obj.emailid);">Block</a>
+             <a href="#" class="btn  btn-danger" ng-click="doResume(obj.emailid);">Resume</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
