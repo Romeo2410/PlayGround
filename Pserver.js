@@ -190,10 +190,10 @@ ctp.post("/save-data",async function(req,resp)
             resp.send(err.message)
     })
 }
-catch (err) {
+catch (err){
         console.error("Server Error:", err);
         resp.status(500).send("Server Error: " + err.message);
-}    
+}
 })
      ctp.get("/fetch-user",function(req,resp)
     {
@@ -302,7 +302,8 @@ ctp.get("/fetch-all-users",function(req,resp){
                
         })
 })
-ctp.post("/publish-tournaments",async function(req,resp){  
+ctp.post("/publish-tournaments",async function(req,resp){
+    try{     
     var taareektime=req.body.Date.split("T");
     console.log(taareektime);
     var taareek=taareektime[0];
@@ -334,6 +335,11 @@ ctp.post("/publish-tournaments",async function(req,resp){
         console.log(err.message);
     }     
     })
+}
+catch (err){
+        console.error("Server Error:", err);
+        resp.status(500).send("Server Error: " + err.message);
+    }
 })
 
 ctp.get("/fetch-city",function(req,resp){
@@ -393,6 +399,7 @@ ctp.get("/UpPass",function(req,resp){
 // Player Details 
 ctp.post("/Send-T-Server",async function(req,resp)
 {
+    try{
     //--------Email---
     let mail=req.body.inputEmail;
     console.log(mail);
@@ -455,7 +462,12 @@ ctp.post("/Send-T-Server",async function(req,resp)
         }
         else
             resp.send(err.message)
-    })   
+    })
+}
+catch (err){
+        console.error("Server Error:", err);
+        resp.status(500).send("Server Error: " + err.message);
+    }
 })
 ctp.post("/Modify-Details",async function(req,resp){
         //--------Email---
