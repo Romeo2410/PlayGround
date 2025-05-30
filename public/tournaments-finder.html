@@ -14,7 +14,7 @@
       {
         $scope.doFetchP=function()
         {
-          let url="/fetch-all-users?city="+$scope.selcity+"&game="+$scope.selgame;
+          let url="/fetch-all-users?city="+$scope.selcity+"&game="+$scope.selgame; // query string
           $http.get(url).then(done,fail);
           function done(response)
           {
