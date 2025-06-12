@@ -1,11 +1,11 @@
 {
   "dependencies": {
-    "cloudinary": "^2.5.1",
-    "express": "^4.21.1",
+    "cloudinary": "^2.6.1",
+    "express": "^4.21.2",
     "express-fileupload": "^1.5.1",
-    "mysql2": "^3.11.4",
-    "nodemailer": "^6.9.16",
-    "nodemon": "^3.1.7"
+    "mysql2": "^3.14.1",
+    "nodemailer": "^6.10.1",
+    "nodemon": "^3.1.10"
   },
   "name": "rupakserver",
   "version": "1.0.0",
@@ -16,5 +16,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "��#\u0000 \u0000P\u0000l\u0000a\u0000y\u0000G\u0000r\u0000o\u0000u\u0000n\u0000d\u0000\r\u0000 \u0000#\u0000 \u0000P\u0000l\u0000a\u0000y\u0000G\u0000r\u0000o\u0000u\u0000n\u0000d\u0000\r\u0000 \u0000",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Romeo2410/Playground.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Romeo2410/Playground/issues"
+  },
+  "homepage": "https://github.com/Romeo2410/Playground#readme"
 }
