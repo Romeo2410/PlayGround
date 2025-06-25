@@ -1,49 +1,66 @@
-body{
-    background-color:black;
+body {
+    background-color: #F4F6F8; /* Off-White / Light Gray for main background */
 }
-#Feed{
-    color: white;
+
+#Feed {
+    color: #2C3E50; /* Indigo Blue for text */
     font-size: 25px;
     font-weight: 500;
-    background-color:black;
+    background-color: #ECF0F1; /* Light Gray for feedback section background */
     text-align: center;
 }
-.k{
+
+.k {
     transition: ease all 1s;
 }
-.k:hover{
+
+.k:hover {
     cursor: pointer;
     scale: 1.05;
     transition: ease all 1s;
 }
-#nav,#os,#as,#ru{
-    background-color:#ffc107;
+
+#nav, #os, #as, #ru {
+    background-color: #3498DB; /* Cool Sky Blue for navigation and section headers */
 }
-.alert1{
-    color: green;
+
+.alert1 {
+    color: #2ECC71; /* Emerald Green for valid email feedback */
 }
-.alert2{
-    color: red;
+
+.alert2 {
+    color: #E74C3C; /* Pomegranate Red for invalid email feedback */
 }
-#foot{
-    background-color: black;
+
+#foot {
+    background-color: #ECF0F1; /* Light Gray for footer container */
 }
-#FeedBtn{
-    color: white;
-    background-color: black;
+
+#FeedBtn {
+    color: #FFFFFF; /* Bright White for button text */
+    background-color: #E67E22; /* Coral Orange for feedback button */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
 }
-  
-  #goToTopBtn {
+
+#FeedBtn:hover {
+    background-color: #D35400; /* Dark Coral on hover */
+}
+
+#goToTopBtn {
     position: fixed;
     bottom: 20px;
-    right: 20px;
-    background-color: #FFC107;
+    right: 25px;
+    background-color: #E67E22; /* Coral Orange for go-to-top button */
     border-radius: 50%;
-    color: black;
+    color: #FFFFFF; /* Bright White for button text */
     border: none;
-    padding: 10px 20px;
+    padding: 10px;
     cursor: pointer;
     font-size: 16px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Slightly darker shadow for depth */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+#goToTopBtn:hover {
+    background-color: #D35400; /* Dark Coral on hover */
+}
