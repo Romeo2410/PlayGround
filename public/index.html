@@ -122,8 +122,8 @@ function scrollToTop() {
         })
         //LOGIN----AJAX
         $("#loginbtn").click(function(){
-          var emailbox = $("txtLogemail").val();
-                var passbox=$("txtLogpwd").val();
+          var emailbox = $("#txtLogemail").val();
+                var passbox=$("#txtLogpwd").val();
                 if (emailbox === ""||passbox==="")
                 {
                   alert("Please fill in the Email and Password.");
