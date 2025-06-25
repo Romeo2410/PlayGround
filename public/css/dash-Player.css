@@ -1,10 +1,10 @@
 body {
-    background-color:#F4F6F8; /* Off-White / Light Gray for main background */
+    background-color: #F4F6F8; /* Off-White / Light Gray for main background */
 }
 
 #dash-header {
-    background-color:#3498DB; /* Cool Sky Blue for dashboard header */
-    color:#2C3E50; /* Indigo Blue for text */
+    background-color: #3498DB; /* Cool Sky Blue for dashboard header */
+    color: #2C3E50; /* Indigo Blue for text */
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
@@ -12,7 +12,7 @@ body {
 
 #welcome-msg {
     background-color: #ECF0F1; /* Light Gray for welcome message background */
-    color: #062022; /* Medium Gray for text */
+    color: #7F8C8D; /* Medium Gray for text, corrected from #062022 */
     font-size: 1.25rem;
     padding: 0.5rem;
     text-align: center;
@@ -40,20 +40,22 @@ footer #foot {
     background-color: #ECF0F1; /* Light Gray for footer element */
 }
 
-.btn-custom {
-    background-color:#E67E22; /* Coral Orange for buttons */
-    color:#FFFFFF; /* Bright White for button text */
+.btn.btn-custom {
+    background-color: #E67E22; /* Coral Orange for buttons */
+    color: #FFFFFF; /* Bright White for button text */
+    border-color: #E67E22; /* Match border to background for consistency */
     transition: background-color 0.3s ease; /* Smooth transition for hover */
 }
 
-.btn-custom:hover {
-    background-color:#D35400; /* Dark Coral on hover */
+.btn.btn-custom:hover {
+    background-color: #D35400; /* Dark Coral on hover */
+    border-color: #D35400; /* Match border to hover background */
 }
 
 .text-custom {
-    color:#2C3E50; /* Indigo Blue for links and headings */
+    color: #2C3E50; /* Indigo Blue for links and headings */
 }
 
 .text-secondary-custom {
-    color:#7F8C8D; /* Medium Gray for secondary text */
+    color: #7F8C8D; /* Medium Gray for secondary text */
 }
