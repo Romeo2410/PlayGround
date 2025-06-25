@@ -31,7 +31,7 @@ function scrollToTop() {
   });
 }
 
-     $(document).ready(function(){
+     $(document).ready=(function(){
       //password eye Signup
       $("#eye").mousedown(function(){
                     $("#txtPwd").prop("type","text");
@@ -247,9 +247,7 @@ function scrollToTop() {
       <form action="/Login">
       <div class="modal-body">
      <center><img class="mb-4" src="uploads/Login-photo.jpg" alt="" width="72" height="57"></center>
-
     <!-- LOGIN Email -->
-    <form action="/" method="post">
     <div class="form-floating col-11">
       <input type="email" class="form-control" id="txtLogemail" name="txtLogemail" fdprocessedid="aheau" required>
       <label for="floatingInput">Email address</label>
@@ -265,7 +263,6 @@ function scrollToTop() {
       <i class="fa-regular fa-eye-slash" id="eyep"></i>
     </div>
   </div>
-
   <!-- LOGINBUTTON -->
       <button class="btn btn-warning w-100 ml-5" type="button" id="loginbtn" fdprocessedid="crrkbb">Login</button>
       </div>
@@ -353,7 +350,7 @@ function scrollToTop() {
         </div>
       </div>
     </div>
-               <div class="card mb-3 k col-md-6">
+              <div class="card mb-3 k col-md-6">
            <div class="row g-0">
         <div class="col-md-4 pt-4">
           <img src="Images/Sir ki Photo.jpg" class="img-fluid rounded-start" alt="...">
