@@ -1,10 +1,10 @@
 body {
-    background-color: #F4F6F8; /* Off-White / Light Gray for main background */
+    background-color:#F4F6F8; /* Off-White / Light Gray for main background */
 }
 
 #dash-header {
-    background-color: #3498DB; /* Cool Sky Blue for dashboard header */
-    color: #2C3E50; /* Indigo Blue for text */
+    background-color:#3498DB; /* Cool Sky Blue for dashboard header */
+    color:#2C3E50; /* Indigo Blue for text */
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
@@ -41,19 +41,19 @@ footer #foot {
 }
 
 .btn-custom {
-    background-color: #E67E22; /* Coral Orange for buttons */
-    color: #FFFFFF; /* Bright White for button text */
+    background-color:#E67E22; /* Coral Orange for buttons */
+    color:#FFFFFF; /* Bright White for button text */
     transition: background-color 0.3s ease; /* Smooth transition for hover */
 }
 
 .btn-custom:hover {
-    background-color: #D35400; /* Dark Coral on hover */
+    background-color:#D35400; /* Dark Coral on hover */
 }
 
 .text-custom {
-    color: #2C3E50; /* Indigo Blue for links and headings */
+    color:#2C3E50; /* Indigo Blue for links and headings */
 }
 
 .text-secondary-custom {
-    color: #7F8C8D; /* Medium Gray for secondary text */
+    color:#7F8C8D; /* Medium Gray for secondary text */
 }
