@@ -24,5 +24,6 @@
   "bugs": {
     "url": "https://github.com/Romeo2410/Playground/issues"
   },
-  "homepage": "https://github.com/Romeo2410/Playground#readme"
+  "homepage": "https://github.com/Romeo2410/Playground#readme",
+  "devDependencies": {}
 }
