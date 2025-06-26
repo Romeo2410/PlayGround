@@ -33,11 +33,11 @@ body {
 }
 
 footer #foot {
-    background-color: #E67E22; /* Light Gray for footer container */
+    background-color: #3498DB; /* Light Gray for footer container */
 }
 
 .footer-bg {
-    background-color: #E67E22; /* Light Gray for footer element */
+    background-color: #3498DB; /* Light Gray for footer element */
 }
 
 #FeedBtn {

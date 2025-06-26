@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tournaments Finder</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/tour-finder.css">
+    <script src="https://kit.fontawesome.com/f868df920b.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  
     <script>
       var module = angular.module("kuchModule",[]);
       var controller = module.controller("kuchController", function ($scope,$http) 
       {
         $scope.doFetchP=function()
         {
-          let url="/fetch-all-users?city="+$scope.selcity+"&game="+$scope.selgame; // query string
+          let url="/fetch-all-users?city="+$scope.selcity+"&game="+$scope.selgame;
           $http.get(url).then(done,fail);
           function done(response)
           {
-            // alert(JSON.stringify(response.data));
             $scope.jsonArray=response.data;
           }
           function fail(err)
@@ -27,16 +27,13 @@
           }
         }
 
-
         $scope.doFetchcity=function()
         {
           $scope.selcity="none";
           let url="/fetch-city";
-          
           $http.get(url).then(done,fail);
           function done(response)
           {
-            //alert(JSON.stringify(response.data));
             $scope.jsonArraycity=response.data;
           }
           function fail(err)
@@ -49,12 +46,9 @@
         {
           $scope.selgame="none";
           let url="/fetch-game";
-          //alert();
-          
           $http.get(url).then(done,fail);
           function done(response)
           {
-           // alert(JSON.stringify(response.data));
             $scope.jsonArraygame=response.data;
           }
           function fail(err)
@@ -62,13 +56,13 @@
             alert(err.data);
           }
         }
+
         $scope.doFetchAll=function()
         {
           let url="/fetch-all-userss";
           $http.get(url).then(done,fail);
           function done(response)
           {
-            //alert(JSON.stringify(response.data));
             $scope.jsonArray=response.data;
           }
           function fail(err)
@@ -76,169 +70,164 @@
             alert(err.data);
           }
         }
-        $scope.doFetchOne=function(index){
-          // alert();
-          $scope.selObj=$scope.jsonArray[index];
-          // alert(JSON.stringify($scope.selObj));
 
+        $scope.doFetchOne=function(index){
+          $scope.selObj=$scope.jsonArray[index];
         }
       });
-
     </script>
   </head>
-  <!-- View -->
-   <center>
   <body ng-app="kuchModule" ng-controller="kuchController" ng-init="doFetchgame(); doFetchcity();">
-    <div class="row col-12">
-      <h2 class="bg-black text-warning p-3">Find Tournaments</h2>
-    </div>
-    <div class="container row lg-3">
-    <div class="col-md-6">
-      <!-- <button type="submit" class="btn btn-primary" ng-click="doFetchgame();">Game</button><br> -->
-       <b>Game</b>
-      <label for="inputState" class="form-label"></label>
-      <select id="inputState" class="form-select" ng-model="selgame">
-        <option selected value="none">Choose...</option>
-        <option ng-repeat="boxgame in jsonArraygame"value="{{boxgame.Game}}">{{boxgame.Game}}</option>
-      </select>
-    </div>
-    <div class="col-md-6">
-      <!-- <button type="submit" class="btn btn-primary" ng-click="doFetchcity();">City</button><br> -->
-      <b>City</b>
-      <label for="inputState" class="form-label"></label>
-      <select id="inputState" class="form-select" ng-model="selcity">
-        <option selected value="none">Choose...</option>
-        <option ng-repeat="boxcity in jsonArraycity" value="{{boxcity.City}}">{{boxcity.City}}</option>
-      </select>
-    </div>
-  </div><br><br>
-    <center>
-      <button type="button" ng-click="doFetchP();" class="btn btn-warning">Fetch Acc. City & Game</button>
-      <button type="button" ng-click="doFetchAll();" class="btn btn-warning">Fetch All Records</button>
-    </center>
-    <br>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3" ng-repeat="boxObj  in jsonArray" >
-            <div class="card mt-4">
-             <center> <img src="{{boxObj.Poster}}" width="100" height="100"  alt="..."></center>
-              <div class="card-body">
-                <h5>{{boxObj.emailid}}</h5>
-                <h5 class="card-title">{{boxObj.Game}}</h5>
-                <h5 class="card-title">{{boxObj.City}}</h5>
-
-                <a href="" ng-click="doFetchOne($index);" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">More info</a>
-              </div>
+    <nav class="navbar navbar-expand-lg" id="nav">
+      <div class="container-fluid" id="ho">
+        <a class="navbar-brand" href="#">PlayGround</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+          <ul>
+            <a href="#foot"><button type="button" class="btn btn-custom mt-2">Contact Us</button></a>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container pb-5">
+      <center><h1 class="mt-4 p-1 text-custom" id="dash-header">Find Tournaments</h1></center>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="gameSelect" class="form-label text-custom">Game</label>
+          <select id="gameSelect" class="form-select" ng-model="selgame">
+            <option selected value="none">Choose...</option>
+            <option ng-repeat="boxgame in jsonArraygame" value="{{boxgame.Game}}">{{boxgame.Game}}</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="citySelect" class="form-label text-custom">City</label>
+          <select id="citySelect" class="form-select" ng-model="selcity">
+            <option selected value="none">Choose...</option>
+            <option ng-repeat="boxcity in jsonArraycity" value="{{boxcity.City}}">{{boxcity.City}}</option>
+          </select>
+        </div>
+      </div>
+      <center class="mt-3">
+        <button type="button" ng-click="doFetchP();" class="btn btn-custom">Fetch Acc. City & Game</button>
+        <button type="button" ng-click="doFetchAll();" class="btn btn-custom">Fetch All Records</button>
+      </center>
+      <div class="row mt-4">
+        <div class="col-md-3" ng-repeat="boxObj in jsonArray">
+          <div class="card mt-4 k">
+            <center><img src="{{boxObj.Poster}}" width="100" height="100" alt="Tournament Poster"></center>
+            <div class="card-body">
+              <h5 class="text-custom">{{boxObj.emailid}}</h5>
+              <h5 class="card-title text-custom">{{boxObj.Game}}</h5>
+              <h5 class="card-title text-custom">{{boxObj.City}}</h5>
+              <a href="" ng-click="doFetchOne($index);" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#exampleModal">More info</a>
             </div>
           </div>
         </div>
       </div>
-
-    </center>
-<!-- MORE INFO PURI DETAIL -->
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Tournament Details</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <center><img src="{{selObj.Poster}}" alt="" width="200" height="150"></center><br>
-        <!-- <p>{{selObj.tid}}</p> -->
-        <div class="col-md-12">
-          <label for="Emailid"><b>Email id</b></label>
-          <input type="text" class="form-control" aria-label="First name" value="{{selObj.emailid}}" readonly>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-custom" id="exampleModalLabel">Tournament Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <center><img src="{{selObj.Poster}}" alt="Tournament Poster" width="200" height="150"></center><br>
+            <div class="col-md-12">
+              <label for="emailId" class="text-custom"><b>Email id</b></label>
+              <input type="text" class="form-control" id="emailId" value="{{selObj.emailid}}" readonly>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="game" class="text-custom"><b>Game</b></label>
+                <input type="text" class="form-control" id="game" value="{{selObj.Game}}" readonly>
+              </div>
+              <div class="col-md-6">
+                <label for="title" class="text-custom"><b>Title</b></label>
+                <input type="text" class="form-control" id="title" value="{{selObj.Title}}" readonly>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="entryFees" class="text-custom"><b>Entry Fees</b></label>
+                <input type="text" class="form-control" id="entryFees" value="{{selObj.Fee}}" readonly>
+              </div>
+              <div class="col-md-6">
+                <label for="date" class="text-custom"><b>Date</b></label>
+                <input type="text" class="form-control" id="date" value="{{selObj.Dot | date:'yyyy-MM-dd'}}" readonly>
+              </div>
+            </div>
+            <div class="col">
+              <label for="city" class="text-custom"><b>City</b></label>
+              <input type="text" class="form-control" id="city" value="{{selObj.City}}" readonly>
+            </div>
+            <div class="col">
+              <label for="location" class="text-custom"><b>Location</b></label>
+              <input type="text" class="form-control" id="location" value="{{selObj.Location}}" readonly>
+            </div>
+            <div class="col">
+              <label for="prizes" class="text-custom"><b>Prizes</b></label>
+              <input type="text" class="form-control" id="prizes" value="{{selObj.Prizes}}" readonly>
+            </div>
+            <div class="col">
+              <label for="otherInfo" class="text-custom"><b>Other Information</b></label>
+              <textarea class="form-control" id="otherInfo" readonly>{{selObj.Oinfo}}</textarea>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+<footer id="foot">
+      <hr class="text-light">
+      <div class="container-grid footer-bg px-5 py-4">
         <div class="row">
-        <div class="col-md-6">
-          <label for="Game"><b>Game</b></label>
-          <input type="text" class="form-control" aria-label="First name" value="{{selObj.Game}}" readonly>
-        </div>
-        <div class="col-md-6">
-          <label for="Title"><b>Title</b></label>
-          <input type="text" class="form-control" aria-label="First name" value="{{selObj.Title}}" readonly>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <label for="EntryFees"><b>Entry Fees</b></label>
-          <input type="text" class="form-control" aria-label="First name" value="{{selObj.Fee}}" readonly>
-        </div>
-        <div class="col-md-6">
-          <label for="Date"><b>Date</b></label>
-          <input type="text" class="form-control" aria-label="First name" value="{{selObj.Dot | date:'yyyy-MM-dd'}}" readonly>
-        </div>
-      </div>
-        <div class="col">
-          <label for="City"><b>City</b></label>
-          <input type="text" class="form-control" aria-label="First name" value="{{selObj.City}}" readonly>
-        </div>
-        <div class="col">
-          <label for="Location"><b>Location</b></label>
-          <input type="text" class="form-control" aria-label="First name" value="{{selObj.Location}}" readonly>
-        </div>
-        <div class="col">
-          <label for="Prizes"><b>Prizes</b></label>
-          <input type="text" class="form-control" aria-label="First name" value="{{selObj.Prizes}}" readonly>
-        </div>
-        <div class="col">
-          <label for="Otherinfo"><b>Other Information</b></label>
-          <textarea class="form-control" id="floatingTextarea" readonly>{{selObj.Oinfo}}</textarea>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<br><br>
-<footer class="bg-black">
-  <hr class="text-light">
-  <div class="container text-warning pt-5" id="foot">
-      <div class="row">
-      <div class="col-md-3">
-          <h2 class="text-light">PlayGround</h2>
-          <div class="pb-2 pt-3">
-          <h5 class="text-light" id="Conus">Contact Us</h5>
-          <a href="tel:6239110015" class="text-warning">6239110015</a><br>
-          <a href="mailto:gurrupak24@gmail.com" class="text-warning">gurrupak24@gmail.com</a>
-          <p>Green Avenue|Bathinda|151001</p>
+          <div class="col-md-3">
+            <h2 class="text-custom">PlayGround</h2>
+            <div class="pb-2 pt-3">
+              <h5 class="text-custom">Contact Us</h5>
+              <a href="tel:6239110015" class="text-custom">6239110015</a><br>
+              <a href="mailto:gurrupak24@gmail.com" class="text-custom">gurrupak24@gmail.com</a>
+              <p class="text-secondary-custom">Green Avenue|Bathinda|151001</p>
+            </div>
+            <div class="pb-3">
+              <a href="https://x.com/rupak_gur" target="_blank"><i class="text-custom fa-brands fa-x-twitter fa-2xl"></i></a>
+              <a href="https://www.instagram.com/rupakgurrr" target="_blank"><i class="text-custom fa-brands fa-instagram fa-2xl ps-2"></i></a>
+              <a href="https://www.linkedin.com/in/rupak-gur-852916307" target="_blank"><i class="text-custom fa-brands fa-linkedin-in fa-2xl ps-2"></i></a>
+              <a href="https://github.com/Romeo2410" target="_blank"><i class="text-custom fa-brands fa-github fa-2xl ps-2"></i></a>
+            </div>
           </div>
-          <div class="pb-3">
-          <a href="https://x.com/rupak_gur" target="_blank"><i class="text-warning fa-brands fa-x-twitter fa-2xl"></i></a>
-          <a href="https://www.instagram.com/rupakgurrr" target="_blank"><i class="text-warning fa-brands fa-instagram fa-2xl ps-2"></i></a>
-          <a href="https://www.linkedin.com/in/rupak-gur-852916307" target="_blank"><i class="text-warning fa-brands fa-linkedin-in fa-2xl ps-2"></i></a>
-          <a href="https://github.com/Romeo2410" target="_blank"><i class="text-warning fa-brands fa-github fa-2xl ps-2"></i></a>
+          <div class="col-md-3">
+            <h5 class="text-custom">Menu</h5>
+            <p><a class="text-custom" href="#ho">Home</a></p>
+            <p><a class="text-custom" href="#os">Services</a></p>
+            <p><a class="text-custom" href="#as">About</a></p>
+            <p><a class="text-custom" href="#ru">Contact</a></p>
           </div>
+          <div class="col-md-3">
+            <h5 class="text-custom">Our Services</h5>
+            <p class="text-secondary-custom">Publish Tournaments</p>
+            <p class="text-secondary-custom">Upcoming Tournaments</p>
+            <p class="text-secondary-custom">Win Prizes</p>
+            <p class="text-secondary-custom">Certification</p>
+          </div>
+          <div class="col-md-3">
+            <h5 class="text-custom">Our Vision</h5>
+            <p class="text-secondary-custom">"To be the leading platform where gamers of all levels can easily 
+              discover, join, and host exciting tournaments, making up a vibrant and 
+              inclusive community of competitive players."</p>
+          </div>
+        </div>
       </div>
-      <div class="col-md-3">
-          <h5 class="text-light">Menu</h5>
-          <p class="text-warning">Home</p>
-          <p class="text-warning">Services</p>
-          <p class="text-warning">About</p>
-          <p class="text-warning">Contact</p>
+      <div class="col-md-12">
+        <div class="container text-center">
+          <p class="text-secondary-custom">© 2024 PlayGround, Inc</p>
+        </div>
       </div>
-      <div class="col-md-3">
-          <h5 class="text-light">Our Services</h5>
-          <p>Publish Tournaments</p>
-          <p>Upcoming Tournaments</p>
-          <p>Win Prizes</p>
-          <p>Certification</p>
-      </div>
-      <div class="col-md-3">
-        <h5 class="text-light">Our Vision</h5>
-        <p>"To be the leading platform where gamers of all levels can easily 
-          discover, join, and host exciting tournaments, making up a vibrant and 
-          inclusive community of competitive players."
-        </p>
-      </div>
-  </div>
-  </div>
-  <div class="col-md-12">
-    <div class="container text-center">
-    <p class="text-center text-light">© 2024 PlayGround, Inc</p>
-    </div>
-  </div>
-</footer>
-</body>
+    </footer>
+  </body>
 </html>

@@ -33,11 +33,11 @@ body {
 }
 
 footer #foot {
-    background-color: #ECF0F1; /* Light Gray for footer container */
+    background-color: #3498DB; /* Light Gray for footer container */
 }
 
 .footer-bg {
-    background-color: #ECF0F1; /* Light Gray for footer element */
+    background-color: #3498DB; /* Light Gray for footer element */
 }
 
 .btn.btn-custom {
@@ -57,5 +57,5 @@ footer #foot {
 }
 
 .text-secondary-custom {
-    color: #7F8C8D; /* Medium Gray for secondary text */
+    color: #2C3E50; /* Medium Gray for secondary text */
 }

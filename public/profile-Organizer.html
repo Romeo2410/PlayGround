@@ -1,123 +1,117 @@
-<!Doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profile Organizer</title>
+    <title>Organizer's Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/organizerp.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
-        function preview() 
-        {
-        prev.src=URL.createObjectURL(event.target.files[0]);
-        }
+      function preview() {
+        prev.src = URL.createObjectURL(event.target.files[0]);
+      }
       $(document).ready(function(){
-        $("#inputEmail").val(localStorage.getItem("activeUserO")).attr("readonly",true);
+        $("#inputEmail").val(localStorage.getItem("activeUserO")).attr("readonly", true);
         $("#btnFetch").click(function(){
-          let email=$("#inputEmail").val();
-          // alert(email); 
-           let obj={
-                type:"get",
-                url:"/fetch-user",
-                data:{
-                  inputEmail:email
-                }
+          let email = $("#inputEmail").val();
+          let obj = {
+            type: "get",
+            url: "/fetch-user",
+            data: {
+              inputEmail: email
             }
-            $.ajax(obj).done(function(responseAry){
-              //alert(JSON.stringify(responseAry));
-              if(responseAry.length==0)
-             {
+          };
+          $.ajax(obj).done(function(responseAry){
+            if (responseAry.length == 0) {
               alert("Invalid Id");
               return;
-             }
+            }
             $("#Org").val(responseAry[0].Organization);
             $("#Contact").val(responseAry[0].contact);
             $("#inputAddress").val(responseAry[0].address);
             $("#inputCity").val(responseAry[0].city);
-            $("#prev").prop("src",responseAry[0].propic);
+            $("#prev").prop("src", responseAry[0].propic);
             $("#PrevsText").val(responseAry[0].prev);
             $("#Web").val(responseAry[0].website);
             $("#Insta").val(responseAry[0].insta);
             $("#Proof").val(responseAry[0].proof);
             $("#sports").val(responseAry[0].sports);
           }).fail(function(err){
-           alert(err);
-          })
+            alert(err);
+          });
+        });
       });
-      })
     </script>
   </head>
   <body>
-    <div class="col-md-12">
-      <center><h2 class="text-warning bg-black p-3">Organizer's Profile</h2></center>
-    </div>
-      <div class="container">
-    <form class="row g-3" enctype="multipart/form-data" method="post">
+    <div class="container pb-5">
+      <center><h1 class="mt-4 p-1 text-custom" id="dash-header">Organizer's Profile</h1></center>
+      <form class="row g-3" enctype="multipart/form-data" method="post">
         <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">Email</label>
+          <label for="inputEmail" class="form-label text-custom">Email</label>
           <input type="email" class="form-control" id="inputEmail" name="inputEmail">
         </div>
         <div class="col-md-6">
-          <button type="button" class="btn btn-outline-warning" style="margin-top: 30px;" id="btnFetch">Search</button>
+          <button type="button" class="btn btn-custom" id="btnFetch" style="margin-top: 30px;">Search</button>
         </div>
         <div class="col-6">
-            <label for="inputOrgName" class="form-label">Organziation</label>
-            <input type="text" class="form-control" id="Org" name="Org">
-          </div>
+          <label for="Org" class="form-label text-custom">Organization</label>
+          <input type="text" class="form-control" id="Org" name="Org">
+        </div>
         <div class="col-6">
-            <label for="inputRep.CN" class="form-label">Representative Contact</label>
-            <input type="text" class="form-control" id="Contact" name="Contact" placeholder="+91 0000000000">
-          </div>
+          <label for="Contact" class="form-label text-custom">Representative Contact</label>
+          <input type="text" class="form-control" id="Contact" name="Contact" placeholder="+91 0000000000">
+        </div>
         <div class="col-6">
-          <label for="inputAddress" class="form-label">Address </label>
+          <label for="inputAddress" class="form-label text-custom">Address</label>
           <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="Apartment, studio, or floor">
         </div>
         <div class="col-md-6">
-          <label for="inputCity" class="form-label">City</label>
+          <label for="inputCity" class="form-label text-custom">City</label>
           <input type="text" class="form-control" id="inputCity" name="inputCity">
         </div>
         <div class="col-md-4">
-          <label for="inputIDProof" class="form-label">Id Proof</label>
-          <select  name="inputProof" id="Proof"  class="form-select">
+          <label for="Proof" class="form-label text-custom">Id Proof</label>
+          <select name="Proof" id="Proof" class="form-select">
             <option value="" selected disabled>Select Valid Id Proof</option>
             <option value="Registration Certificate">Registration Certificate</option>
             <option value="Aadhar Card">Aadhar Card</option>
           </select>
         </div>
         <div class="col-md-6">
-            <label for="profilepic" class="form-label">Upload Profile Pic:</label>
-            <input type="file" accept="image/*" name="profilepic" onchange="preview();">
-            <img src="" id="prev" alt="" width="100" height="100">
+          <label for="profilepic" class="form-label text-custom">Upload Profile Pic:</label>
+          <input type="file" accept="image/*" name="profilepic" onchange="preview();">
+          <img src="" id="prev" alt="Profile Picture" width="100" height="100">
         </div>
         <div class="col-5">
-            <label for="Sports Deal" class="form-label">Deals in Sports</label><br>
-            <select name="Sport" multiple size="4" id="sports" >
-                <option value="Cricket">Cricket</option>
-                <option value="Football">Football</option>
-                <option value="Hockey">Hockey</option>
-                <option value="Basketball">Basketball</option>
-            </select>
-          </div>
-          <div class="col-6">
-            <label for="PrevsTournaments" class="form-label">Previous Tournaments</label>
-            <textarea name="PrevsText" id="PrevsText" class="form-control"></textarea>
-          </div>
-          <div class="col-6">
-            <label for="Website" class="form-label">Website</label>
-            <input type="text" class="form-control" id="Web" name="Web">
-          </div>
-          <div class="col-6">
-            <label for="Insta" class="form-label">Instagram</label>
-            <input type="text" class="form-control" id="Insta" name="Insta">
-          </div>
-          <div class="col-6">
-            <button type="submit" class="btn btn-warning" formaction="/save-data">Save</button>
-          </div>
-          <div class="col-6">
-            <button type="submit" class="btn btn-warning" formaction="/update-data">Update</button>
-          </div>
+          <label for="sports" class="form-label text-custom">Deals in Sports</label>
+          <select name="Sport" multiple size="4" id="sports" class="form-select">
+            <option value="Cricket">Cricket</option>
+            <option value="Football">Football</option>
+            <option value="Hockey">Hockey</option>
+            <option value="Basketball">Basketball</option>
+          </select>
         </div>
-    </form>
+        <div class="col-6">
+          <label for="PrevsText" class="form-label text-custom">Previous Tournaments</label>
+          <textarea name="PrevsText" id="PrevsText" class="form-control"></textarea>
+        </div>
+        <div class="col-6">
+          <label for="Web" class="form-label text-custom">Website</label>
+          <input type="text" class="form-control" id="Web" name="Web">
+        </div>
+        <div class="col-6">
+          <label for="Insta" class="form-label text-custom">Instagram</label>
+          <input type="text" class="form-control" id="Insta" name="Insta">
+        </div>
+        <div class="col-6">
+          <button type="submit" class="btn btn-custom" formaction="/save-data">Save</button>
+        </div>
+        <div class="col-6">
+          <button type="submit" class="btn btn-custom" formaction="/update-data">Update</button>
+        </div>
+      </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

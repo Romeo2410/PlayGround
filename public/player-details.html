@@ -1,36 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Player's Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/playerp.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
-      function preview()
-     {
-      prev.src=URL.createObjectURL(event.target.files[0]);
-     } 
-     $(document).ready(function(){
-      $("#inputEmail").val(localStorage.getItem("activeUserP")).attr("readonly",true);
-      $("#activeUserP").html(localStorage.getItem("activeUserP"));
+      function preview() {
+        prev.src = URL.createObjectURL(event.target.files[0]);
+      }
+      $(document).ready(function(){
+        $("#inputEmail").val(localStorage.getItem("activeUserP")).attr("readonly", true);
+        $("#activeUserP").html(localStorage.getItem("activeUserP"));
         $("#Fetchbtn").click(function(){
-            let email=$("#inputEmail").val();
-            // alert(email);
-           let obj={
-                type:"get",
-                url:"/fetch-player",
-                data:{
-                  inputEmail:email
-                }
+          let email = $("#inputEmail").val();
+          let obj = {
+            type: "get",
+            url: "/fetch-player",
+            data: {
+              inputEmail: email
             }
-            $.ajax(obj).done(function(responseAry){
-              // alert(JSON.stringify(responseAry));
-              if(responseAry.length==0)
-             {
+          };
+          $.ajax(obj).done(function(responseAry){
+            if (responseAry.length == 0) {
               alert("Invalid Id");
               return;
-             }
+            }
             $("#Name").val(responseAry[0].name);
             $("#Game").val(responseAry[0].games);
             $("#Contact").val(responseAry[0].mobile);
@@ -39,86 +36,82 @@
             $("#inputAddress").val(responseAry[0].address);
             $("#inputCity").val(responseAry[0].city);
             $("#Proof").val(responseAry[0].idproof);
-            $("#prev").prop("src",responseAry[0].poster);
+            $("#prev").prop("src", responseAry[0].poster);
             $("#PrevsText").val(responseAry[0].otherinfo);
           }).fail(function(err){
-
-          alert(err);
-          })
+            alert(err);
+          });
+        });
       });
-      })
- </script> 
+    </script>
   </head>
   <body>
-    <div class="col-md-12">
-      <center><h2 class="text-warning bg-black p-3">Player's Profile</h2></center>
-    </div>
-    <div class="container">
-    <form class="row g-3" enctype="multipart/form-data" method="post">
+    <div class="container pb-5">
+      <center><h1 class="mt-4 p-1 text-custom" id="dash-header">Player's Profile</h1></center>
+      <form class="row g-3" enctype="multipart/form-data" method="post">
         <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">Email</label>
+          <label for="inputEmail" class="form-label text-custom">Email</label>
           <input type="email" class="form-control" id="inputEmail" name="inputEmail">
         </div>
         <div class="col-md-6">
-            <button type="button" class="btn btn-outline-warning" style="margin-top: 30px;" id="Fetchbtn">Search</button>
+          <button type="button" class="btn btn-custom" id="Fetchbtn" style="margin-top: 30px;">Search</button>
         </div>
         <div class="col-4">
-            <label for="inputOrgName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="Name" name="Name">
-          </div>
-          <div class="col-4">
-            <label for="inputOrgName" class="form-label">Games</label>
-            <input type="text" class="form-control" id="Game" name="Game">
-          </div>
+          <label for="Name" class="form-label text-custom">Name</label>
+          <input type="text" class="form-control" id="Name" name="Name">
+        </div>
         <div class="col-4">
-            <label for="inputContact" class="form-label">Contact</label>
-            <input type="text" class="form-control" id="Contact" name="Contact" placeholder="+91 0000000000">
-          </div>
-        <div class="col-6">
-          <label for="inputAddress" class="form-label">Date of Birth</label>
-          <input type="date" class="form-control" id="Birthday" name="Birth" >
+          <label for="Game" class="form-label text-custom">Games</label>
+          <input type="text" class="form-control" id="Game" name="Game">
+        </div>
+        <div class="col-4">
+          <label for="Contact" class="form-label text-custom">Contact</label>
+          <input type="text" class="form-control" id="Contact" name="Contact" placeholder="+91 0000000000">
         </div>
         <div class="col-6">
-            <label for="inputAddress" class="form-label">Gender</label>
-            <select  name="Gender" id="Gender"  class="form-select">
-                <option value="" selected disabled>Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-          </div>
-          <div class="col-6">
-            <label for="inputAddress" class="form-label">Address</label>
-            <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="Apartment, studio, or floor">
-          </div>
+          <label for="Birthday" class="form-label text-custom">Date of Birth</label>
+          <input type="date" class="form-control" id="Birthday" name="Birth">
+        </div>
+        <div class="col-6">
+          <label for="Gender" class="form-label text-custom">Gender</label>
+          <select name="Gender" id="Gender" class="form-select">
+            <option value="" selected disabled>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label for="inputAddress" class="form-label text-custom">Address</label>
+          <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="Apartment, studio, or floor">
+        </div>
         <div class="col-md-6">
-          <label for="inputCity" class="form-label">City</label>
+          <label for="inputCity" class="form-label text-custom">City</label>
           <input type="text" class="form-control" id="inputCity" name="inputCity">
         </div>
         <div class="col-md-4">
-          <label for="inputIDProof" class="form-label">Id Proof</label>
-          <select  name="Proof" id="Proof"  class="form-select">
+          <label for="Proof" class="form-label text-custom">Id Proof</label>
+          <select name="Proof" id="Proof" class="form-select">
             <option value="" selected disabled>Select Valid Id Proof</option>
             <option value="Certificate">Certificate</option>
             <option value="Aadhar Card">Aadhar Card</option>
           </select>
         </div>
         <div class="col-md-6">
-            <label for="profilepic" class="form-label">Upload Profile Pic:</label>
-            <input type="file" accept="image/*" name="profilepic" onchange="preview();">
-            <img src="" id="prev" alt="" width="100" height="100">
+          <label for="profilepic" class="form-label text-custom">Upload Profile Pic:</label>
+          <input type="file" accept="image/*" name="profilepic" onchange="preview();">
+          <img src="" id="prev" alt="Profile Picture" width="100" height="100">
         </div>
         <div class="col-md-12">
-            <label for="PrevsTournaments" class="form-label">Other Info / Past Achivements </label>
-            <textarea name="PrevsText" id="PrevsText" class="form-control"></textarea>
-          </div>
-          <div class="col-6">
-            <button type="submit" class="btn btn-warning" formaction="/Send-T-Server">Send to Server</button>
-          </div>
-          <div class="col-6">
-            <button type="submit" class="btn btn-warning" formaction="/Modify-Details">Modify</button>
-          </div>
+          <label for="PrevsText" class="form-label text-custom">Other Info / Past Achievements</label>
+          <textarea name="PrevsText" id="PrevsText" class="form-control"></textarea>
         </div>
-    </form>
+        <div class="col-6">
+          <button type="submit" class="btn btn-custom" formaction="/Send-T-Server">Send to Server</button>
+        </div>
+        <div class="col-6">
+          <button type="submit" class="btn btn-custom" formaction="/Modify-Details">Modify</button>
+        </div>
+      </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
