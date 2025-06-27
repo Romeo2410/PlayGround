@@ -39,3 +39,7 @@ body {
     color: #2C3E50; /* Indigo Blue for text */
     border-color: #7F8C8D; /* Medium Gray for border */
 }
+.alert2 {
+    color: #E74C3C; /* Pomegranate Red for image Size */
+    font-weight: 500;
+}
