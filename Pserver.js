@@ -156,7 +156,7 @@ ctp.get("/Login", function(req, resp) {
             <p>This is to inform you that your account <b>${email}</b> was just logged in successfully.</p>
             <p>If this was not you, please change your password immediately.</p>
             <br>
-            <p style="font-size:0.9em; color:#888;">Timestamp: ${new Date().toLocaleString()}</p>
+            <p style="font-size:0.9em; color:#888;">Date: ${new Date().toLocaleDateString()}</p>
           </div>
         `;
 
