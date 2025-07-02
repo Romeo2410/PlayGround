@@ -157,6 +157,7 @@ ctp.get("/Login", function(req, resp) {
         // Send login email
         transporter.sendMail(
           {
+            from: '"PlayGround Team" <bcacs2021155@gmail.com>',
             to: email,
             subject: subject,
             html: message,
