@@ -578,23 +578,45 @@ mysqlServer.query("select * from players where emailid=?",[email],function(err,j
         resp.send(jsonArray);
 })
 })
-ctp.post("/SendFeedback",function (req,resp){
-    var Fname=req.body.feedname;
-    var feed=req.body.Feedback;
-    var num=req.body.Cont;
-//  email content
-var subject = "Feedback from "+Fname ;
-var message ="<h1>Feedback</h1>"+feed+"<br>"+"<br>"+"<b>Contact</b>"+num;
-// Send email
-transporter.sendMail({
-    to: "bcacs2021155@gmail.com",
-    subject: subject,
-    html: message
-})
-    console.log("Email sent");
-    resp.send("Feedback sent successfully!");
-})
+// Feedback Route
+ctp.post("/SendFeedback", function (req, resp) {
+  var Fname = req.body.feedname;
+  var feed = req.body.Feedback;
+  var num = req.body.Cont;
 
+  var subject = `New Feedback from ${Fname}`;
+
+  var message = `
+    <div style="font-family: Arial, sans-serif; color: #333;">
+      <h2 style="color: #4CAF50;">New Feedback Received</h2>
+      <p><strong>Name:</strong> ${Fname}</p>
+      <p><strong>Contact:</strong> ${num}</p>
+      <p><strong>Feedback:</strong></p>
+      <blockquote style="border-left: 4px solid #4CAF50; margin: 10px; padding-left: 10px; color: #555;">
+        ${feed}
+      </blockquote>
+      <br>
+      <p style="font-size: 0.9em; color: #888;">This message was generated automatically by your website feedback form.</p>
+    </div>
+  `;
+
+  transporter.sendMail(
+    {
+      to: "bcacs2021155@gmail.com",
+      subject: subject,
+      html: message,
+    },
+    function (error, info) {
+      if (error) {
+        console.error("Email error:", error);
+        resp.send("Error sending feedback.");
+      } else {
+        console.log("Email sent:", info.response);
+        resp.send("Feedback sent successfully!");
+      }
+    }
+  );
+});
 //=============angular Ajax===============================
 ctp.get("/all-records",function(req,resp)
 {
