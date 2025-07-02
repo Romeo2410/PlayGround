@@ -128,23 +128,63 @@ ctp.get("/check-user",function(req,resp)
 })
 //------------------login
 ctp.get("/Login", function(req, resp) {
-    let email = req.query.txtLogemail;
-    let pwd = req.query.txtLogpwd;
-    mysqlServer.query("SELECT * FROM users WHERE emailid = ?  and pwd = ? and status=1", [email, pwd], function(err, jsonArray) {
-        console.log("Email:", email);
+  let email = req.query.txtLogemail;
+  let pwd = req.query.txtLogpwd;
 
-        // Check if user is found
-        if (jsonArray.length ==1) 
-            {
-            // Respond with user type and status
-            resp.send(jsonArray[0]["utype"]);
-            console.log(jsonArray[0]["status"]);
-            } 
-        else {
-            resp.send("Incorrect credentials");
-        }
-    })
-})
+  mysqlServer.query(
+    "SELECT * FROM users WHERE emailid = ? AND pwd = ? AND status=1",
+    [email, pwd],
+    function(err, jsonArray) {
+      console.log("Email:", email);
+
+      if (err) {
+        console.error("DB error:", err);
+        resp.send("Server error");
+        return;
+      }
+
+      if (jsonArray.length === 1) {
+        const userType = jsonArray[0]["utype"];
+        console.log("Login success. User type:", userType);
+
+        // Prepare login email notification
+        const subject = "Login Alert - Your Account";
+        const message = `
+          <div style="font-family: Arial, sans-serif; color: #333;">
+            <h2 style="color:#4CAF50;">Login Notification</h2>
+            <p>Hello,</p>
+            <p>This is to inform you that your account <b>${email}</b> was just logged in successfully.</p>
+            <p>If this was not you, please change your password immediately.</p>
+            <br>
+            <p style="font-size:0.9em; color:#888;">Timestamp: ${new Date().toLocaleString()}</p>
+          </div>
+        `;
+
+        // Send login email
+        transporter.sendMail(
+          {
+            to: email,
+            subject: subject,
+            html: message,
+          },
+          function(mailErr, info) {
+            if (mailErr) {
+              console.error("Error sending login email:", mailErr);
+              // Even if email fails, we still allow login
+            } else {
+              console.log("Login email sent:", info.response);
+            }
+
+            // Always respond to client after email attempt
+            resp.send(userType);
+          }
+        );
+      } else {
+        resp.send("Incorrect credentials");
+      }
+    }
+  );
+});
 //------------------- Upload Files
 ctp.use(fileuploader());
 ctp.use(express.urlencoded(true));//binary to json conversion
