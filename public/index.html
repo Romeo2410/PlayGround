@@ -80,15 +80,6 @@
             $("#signupbtn").prop("disabled",true);
           }
         });
-        // Feedback button validation
-        $("#FeedBtn").click(function(){
-          var FN=$("#feedname").val();
-          var Cn=$("#Cont").val();
-          if(FN===""||Cn===""){
-            alert("Please Enter Name and Contact to send Feedback");
-            return false;
-          }
-        });
         // Signup AJAX
         $("#signupbtn").click(function(){
           var emailbox = $("#txtEmail").val();
