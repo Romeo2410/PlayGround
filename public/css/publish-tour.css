@@ -1,45 +1,62 @@
 body {
-    background-color: #F4F6F8; /* Off-White / Light Gray for main background */
+    background-color: #F4F6F8;
+    /* Off-White / Light Gray for main background */
 }
 
 #dash-header {
-    background-color: #3498DB; /* Cool Sky Blue for header */
-    color: #2C3E50; /* Indigo Blue for text */
+    background-color: #3498DB;
+    /* Cool Sky Blue for header */
+    color: #2C3E50;
+    /* Indigo Blue for text */
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
 }
 
 .btn.btn-custom {
-    background-color: #E67E22; /* Coral Orange for buttons */
-    color: #FFFFFF; /* Bright White for button text */
-    border-color: #E67E22; /* Match border to background for consistency */
-    transition: background-color 0.3s ease; /* Smooth transition for hover */
+    background-color: #E67E22;
+    /* Coral Orange for buttons */
+    color: #FFFFFF;
+    /* Bright White for button text */
+    border-color: #E67E22;
+    /* Match border to background for consistency */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover */
 }
 
 .btn.btn-custom:hover {
-    background-color: #D35400; /* Dark Coral on hover */
-    border-color: #D35400; /* Match border to hover background */
+    background-color: #D35400;
+    /* Dark Coral on hover */
+    border-color: #D35400;
+    /* Match border to hover background */
 }
 
 .text-custom {
-    color: #2C3E50; /* Indigo Blue for links, headings, and labels */
+    color: #2C3E50;
+    /* Indigo Blue for links, headings, and labels */
 }
 
 .text-secondary-custom {
-    color: #7F8C8D; /* Medium Gray for secondary text */
+    color: #7F8C8D;
+    /* Medium Gray for secondary text */
 }
 
 .form-label.text-custom {
-    color: #2C3E50; /* Indigo Blue for form labels */
+    color: #2C3E50;
+    /* Indigo Blue for form labels */
 }
 
 .form-control {
-    background-color: #FFFFFF; /* White background for inputs */
-    color: #2C3E50; /* Indigo Blue for text */
-    border-color: #7F8C8D; /* Medium Gray for border */
+    background-color: #FFFFFF;
+    /* White background for inputs */
+    color: #2C3E50;
+    /* Indigo Blue for text */
+    border-color: #7F8C8D;
+    /* Medium Gray for border */
 }
+
 .alert2 {
-    color: #E74C3C; /* Pomegranate Red for image Size */
+    color: #E74C3C;
+    /* Pomegranate Red for image Size */
     font-weight: 500;
 }

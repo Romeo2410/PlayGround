@@ -1,167 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Player Dashboard</title>
-    <link rel="stylesheet" href="css/dash-Player.css"> <!-- Verify this path is correct -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/f868df920b.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script>
-      $(document).ready(function(){
-        $("#inputEmail").val(localStorage.getItem("activeUserP")).attr("readonly",true);
-        $("#activeUserP").html(localStorage.getItem("activeUserP"));
-        $("#UpdatePwd").click(function(){
-          let email=$("#inputEmail").val(); 
-          let pass=$("#CurrPwd").val();
-          let newPass=$("#NewPwd").val();
-          let obj={
-            type:"get",
-            url:"/UpPass",
-            data:{
-              inputEmail:email,
-              CurrPwd:pass,
-              NewPwd:newPass,
-            }
-          };
-          $.ajax(obj).done(function(response){
-            alert(response);
-          }).fail(function(err){
-            alert("server error");
-          });
-        });
-        $("#LogoutP").click(function(){
-          localStorage.removeItem("activeUserP");
-          history.pushState(null, "", "index.html");
-          location.href="index.html";
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Player Dashboard</title>
+  <link rel="stylesheet" href="css/dash-Player.css"> <!-- Verify this path is correct -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/f868df920b.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      $("#inputEmail").val(localStorage.getItem("activeUserP")).attr("readonly", true);
+      $("#activeUserP").html(localStorage.getItem("activeUserP"));
+      $("#UpdatePwd").click(function () {
+        let email = $("#inputEmail").val();
+        let pass = $("#CurrPwd").val();
+        let newPass = $("#NewPwd").val();
+        let obj = {
+          type: "get",
+          url: "/UpPass",
+          data: {
+            inputEmail: email,
+            CurrPwd: pass,
+            NewPwd: newPass,
+          }
+        };
+        $.ajax(obj).done(function (response) {
+          alert(response);
+        }).fail(function (err) {
+          alert("server error");
         });
       });
-    </script>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg" id="nav">
-      <div class="container-fluid" id="ho">
-        <a class="navbar-brand" href="#">PlayGround</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-          <ul>
-            <a href="#foot"><button type="button" class="btn btn-custom mt-2">Contact Us</button></a>
-          </ul>
+      $("#LogoutP").click(function () {
+        localStorage.removeItem("activeUserP");
+        history.pushState(null, "", "index.html");
+        location.href = "index.html";
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg" id="nav">
+    <div class="container-fluid" id="ho">
+      <a class="navbar-brand" href="#">PlayGround</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+        <ul>
+          <a href="#foot"><button type="button" class="btn btn-custom mt-2">Contact Us</button></a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container pb-5">
+    <center>
+      <h1 class="mt-4 p-1 text-custom" id="dash-header">Player Dashboard</h1>
+    </center>
+    <center>
+      <p class="mt-3 text-secondary-custom" id="welcome-msg">Welcome : <span id="activeUserP"></span></p>
+    </center>
+    <div class="row">
+      <div class="card col-md-3 k">
+        <img src="Images/Players-Profile.png" class="card-img-top" alt="Players-Profile">
+        <div class="card-body">
+          <a href="player-details.html" class="btn btn-custom">Profile</a>
         </div>
       </div>
-    </nav>
-    <div class="container pb-5">
-      <center><h1 class="mt-4 p-1 text-custom" id="dash-header">Player Dashboard</h1></center>
-      <center><p class="mt-3 text-secondary-custom" id="welcome-msg">Welcome : <span id="activeUserP"></span></p></center>
+      <div class="card col-md-3 k">
+        <img src="Images/Post-Tournaments.jpg" class="card-img-top" alt="Post-Tournaments">
+        <div class="card-body">
+          <a href="tournaments-finder.html" class="btn btn-custom">Find Tournaments</a>
+        </div>
+      </div>
+      <div class="card col-md-3 k">
+        <img src="Images/Players-Settings.png" class="card-img-top" alt="Settings">
+        <div class="card-body">
+          <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#Settings">Settings</button>
+        </div>
+      </div>
+      <div class="card col-md-3 k">
+        <img src="Images/Players-Logout.png" class="card-img-top" alt="Logout">
+        <div class="card-body">
+          <a href="#" class="btn btn-custom" id="LogoutP">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Settings modal -->
+  <div class="modal fade" tabindex="-1" id="Settings">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-custom">Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/Settings">
+            <div class="col-md-12">
+              <label for="inputEmail" class="form-label text-custom">Email</label>
+              <input type="email" class="form-control" id="inputEmail" name="inputEmail">
+            </div>
+            <div class="col-md-12">
+              <label for="CurrPwd" class="form-label text-custom">Current Password</label>
+              <input type="password" class="form-control" id="CurrPwd">
+            </div>
+            <div class="col-md-12">
+              <label for="NewPwd" class="form-label text-custom">New Password</label>
+              <input type="password" class="form-control" id="NewPwd">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-custom" id="UpdatePwd">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer id="foot">
+    <hr class="text-light">
+    <div class="container-grid footer-bg px-5 pt-4">
       <div class="row">
-        <div class="card col-md-3 k">
-          <img src="Images/Players-Profile.png" class="card-img-top" alt="Players-Profile">
-          <div class="card-body">
-            <a href="player-details.html" class="btn btn-custom">Profile</a>
+        <div class="col-md-3">
+          <h2 class="text-custom">PlayGround</h2>
+          <div class="pb-2 pt-3">
+            <h5 class="text-custom">Contact Us</h5>
+            <a href="tel:6239110015" class="text-custom">6239110015</a><br>
+            <a href="mailto:gurrupak24@gmail.com" class="text-custom">gurrupak24@gmail.com</a>
+            <p class="text-secondary-custom">Green Avenue|Bathinda|151001</p>
+          </div>
+          <div class="pb-3">
+            <a href="https://x.com/rupak_gur" target="_blank"><i
+                class="text-custom fa-brands fa-x-twitter fa-2xl"></i></a>
+            <a href="https://www.instagram.com/rupakgurrr" target="_blank"><i
+                class="text-custom fa-brands fa-instagram fa-2xl ps-2"></i></a>
+            <a href="https://www.linkedin.com/in/rupak-gur-852916307" target="_blank"><i
+                class="text-custom fa-brands fa-linkedin-in fa-2xl ps-2"></i></a>
+            <a href="https://github.com/Romeo2410" target="_blank"><i
+                class="text-custom fa-brands fa-github fa-2xl ps-2"></i></a>
           </div>
         </div>
-        <div class="card col-md-3 k">
-          <img src="Images/Post-Tournaments.jpg" class="card-img-top" alt="Post-Tournaments">
-          <div class="card-body">
-            <a href="tournaments-finder.html" class="btn btn-custom">Find Tournaments</a>
-          </div>
+        <div class="col-md-3">
+          <h5 class="text-custom">Menu</h5>
+          <p><a class="text-custom" href="#ho">Home</a></p>
+          <p><a class="text-custom" href="#os">Services</a></p>
+          <p><a class="text-custom" href="#as">About</a></p>
+          <p><a class="text-custom" href="#ru">Contact</a></p>
         </div>
-        <div class="card col-md-3 k">
-          <img src="Images/Players-Settings.png" class="card-img-top" alt="Settings">
-          <div class="card-body">
-            <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#Settings">Settings</button>
-          </div>
+        <div class="col-md-3">
+          <h5 class="text-custom">Our Services</h5>
+          <p class="text-secondary-custom">Publish Tournaments</p>
+          <p class="text-secondary-custom">Upcoming Tournaments</p>
+          <p class="text-secondary-custom">Win Prizes</p>
+          <p class="text-secondary-custom">Certification</p>
         </div>
-        <div class="card col-md-3 k">
-          <img src="Images/Players-Logout.png" class="card-img-top" alt="Logout">
-          <div class="card-body">
-            <a href="#" class="btn btn-custom" id="LogoutP">Logout</a>
-          </div>
+        <div class="col-md-3">
+          <h5 class="text-custom">Our Vision</h5>
+          <p class="text-secondary-custom">"To be the leading platform where gamers of all levels can easily
+            discover, join, and host exciting tournaments, making up a vibrant and
+            inclusive community of competitive players."</p>
         </div>
-      </div>
-    </div>
-    <!-- Settings modal -->
-    <div class="modal fade" tabindex="-1" id="Settings">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-custom">Settings</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="/Settings">
-              <div class="col-md-12">
-                <label for="inputEmail" class="form-label text-custom">Email</label>
-                <input type="email" class="form-control" id="inputEmail" name="inputEmail">
-              </div>
-              <div class="col-md-12">
-                <label for="CurrPwd" class="form-label text-custom">Current Password</label>
-                <input type="password" class="form-control" id="CurrPwd">
-              </div>
-              <div class="col-md-12">
-                <label for="NewPwd" class="form-label text-custom">New Password</label>
-                <input type="password" class="form-control" id="NewPwd">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-custom" id="UpdatePwd">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Footer -->
-    <footer id="foot">
-      <hr class="text-light">
-      <div class="container-grid footer-bg px-5 pt-4">
-        <div class="row">
-          <div class="col-md-3">
-            <h2 class="text-custom">PlayGround</h2>
-            <div class="pb-2 pt-3">
-              <h5 class="text-custom">Contact Us</h5>
-              <a href="tel:6239110015" class="text-custom">6239110015</a><br>
-              <a href="mailto:gurrupak24@gmail.com" class="text-custom">gurrupak24@gmail.com</a>
-              <p class="text-secondary-custom">Green Avenue|Bathinda|151001</p>
-            </div>
-            <div class="pb-3">
-              <a href="https://x.com/rupak_gur" target="_blank"><i class="text-custom fa-brands fa-x-twitter fa-2xl"></i></a>
-              <a href="https://www.instagram.com/rupakgurrr" target="_blank"><i class="text-custom fa-brands fa-instagram fa-2xl ps-2"></i></a>
-              <a href="https://www.linkedin.com/in/rupak-gur-852916307" target="_blank"><i class="text-custom fa-brands fa-linkedin-in fa-2xl ps-2"></i></a>
-              <a href="https://github.com/Romeo2410" target="_blank"><i class="text-custom fa-brands fa-github fa-2xl ps-2"></i></a>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <h5 class="text-custom">Menu</h5>
-            <p><a class="text-custom" href="#ho">Home</a></p>
-            <p><a class="text-custom" href="#os">Services</a></p>
-            <p><a class="text-custom" href="#as">About</a></p>
-            <p><a class="text-custom" href="#ru">Contact</a></p>
-          </div>
-          <div class="col-md-3">
-            <h5 class="text-custom">Our Services</h5>
-            <p class="text-secondary-custom">Publish Tournaments</p>
-            <p class="text-secondary-custom">Upcoming Tournaments</p>
-            <p class="text-secondary-custom">Win Prizes</p>
-            <p class="text-secondary-custom">Certification</p>
-          </div>
-          <div class="col-md-3">
-            <h5 class="text-custom">Our Vision</h5>
-            <p class="text-secondary-custom">"To be the leading platform where gamers of all levels can easily 
-              discover, join, and host exciting tournaments, making up a vibrant and 
-              inclusive community of competitive players."</p>
-          </div>
         <div class="col-md-12">
-        <div class="container text-center">
-          <p class="text-secondary-custom">© 2024 PlayGround, Inc</p>
+          <div class="container text-center">
+            <p class="text-secondary-custom">© 2024 PlayGround, Inc</p>
+          </div>
         </div>
       </div>
-        </div>
-      </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

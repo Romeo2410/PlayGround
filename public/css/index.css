@@ -1,12 +1,15 @@
 body {
-    background-color: #F4F6F8; /* Off-White / Light Gray for main background */
+    background-color: #F4F6F8;
+    /* Off-White / Light Gray for main background */
 }
 
 #Feed {
-    color: #2C3E50; /* Indigo Blue for text */
+    color: #2C3E50;
+    /* Indigo Blue for text */
     font-size: 25px;
     font-weight: 500;
-    background-color: #ECF0F1; /* Light Gray for feedback section background */
+    background-color: #ECF0F1;
+    /* Light Gray for feedback section background */
     text-align: center;
 }
 
@@ -20,73 +23,97 @@ body {
     transition: ease all 1s;
 }
 
-#nav, #os, #as, #ru {
-    background-color: #3498DB; /* Cool Sky Blue for navigation and section headers */
+#nav,
+#os,
+#as,
+#ru {
+    background-color: #3498DB;
+    /* Cool Sky Blue for navigation and section headers */
 }
 
 .alert1 {
-    color: #2ECC71; /* Emerald Green for valid email feedback */
+    color: #2ECC71;
+    /* Emerald Green for valid email feedback */
 }
 
 .alert2 {
-    color: #E74C3C; /* Pomegranate Red for invalid email feedback */
+    color: #E74C3C;
+    /* Pomegranate Red for invalid email feedback */
 }
 
 footer #foot {
-    background-color: #3498DB; /* Light Gray for footer container */
+    background-color: #3498DB;
+    /* Light Gray for footer container */
 }
 
 .footer-bg {
-    background-color: #3498DB; /* Light Gray for footer element */
+    background-color: #3498DB;
+    /* Light Gray for footer element */
 }
 
 #FeedBtn {
-    color: #FFFFFF; /* Bright White for button text */
-    background-color: #E67E22; /* Coral Orange for feedback button */
-    transition: background-color 0.3s ease; /* Smooth transition for hover */
+    color: #FFFFFF;
+    /* Bright White for button text */
+    background-color: #E67E22;
+    /* Coral Orange for feedback button */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover */
 }
 
 #FeedBtn:hover {
-    background-color: #D35400; /* Dark Coral on hover */
+    background-color: #D35400;
+    /* Dark Coral on hover */
 }
 
 #goToTopBtn {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #E67E22; /* Coral Orange for go-to-top button */
+    background-color: #E67E22;
+    /* Coral Orange for go-to-top button */
     border-radius: 50%;
-    color: #FFFFFF; /* Bright White for icon */
+    color: #FFFFFF;
+    /* Bright White for icon */
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Slightly darker shadow for depth */
-    transition: background-color 0.3s ease; /* Smooth transition for hover */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    /* Slightly darker shadow for depth */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover */
 }
 
 #goToTopBtn:hover {
-    background-color: #D35400; /* Dark Coral on hover */
+    background-color: #D35400;
+    /* Dark Coral on hover */
 }
 
 .feedback-form {
-    background-color: #3498DB; /* Cool Sky Blue for feedback form background */
+    background-color: #3498DB;
+    /* Cool Sky Blue for feedback form background */
 }
 
 .btn-custom {
-    background-color: #E67E22; /* Coral Orange for buttons */
-    color: #FFFFFF; /* Bright White for button text */
-    transition: background-color 0.3s ease; /* Smooth transition for hover */
+    background-color: #E67E22;
+    /* Coral Orange for buttons */
+    color: #FFFFFF;
+    /* Bright White for button text */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover */
 }
 
 .btn-custom:hover {
-    background-color: #D35400; /* Dark Coral on hover */
+    background-color: #D35400;
+    /* Dark Coral on hover */
 }
 
 .text-custom {
-    color: #2C3E50; /* Indigo Blue for links and headings */
+    color: #2C3E50;
+    /* Indigo Blue for links and headings */
 }
 
 .text-secondary-custom {
-    color: #2C3E50; /* Medium Gray for secondary text */
+    color: #2C3E50;
+    /* Medium Gray for secondary text */
 }
