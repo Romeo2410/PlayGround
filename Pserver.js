@@ -65,67 +65,56 @@ ctp.get("/admin",function(req,resp){
     resp.sendFile(path5);
 });
 //------------Database
-       ctp.get("/Signup", function(req, resp) {
-    let email = req.query.txtEmail;
-    let pwd = req.query.txtPwd;
-    let utype = req.query.utype;
+ctp.get("/Signup", function(req, resp) {
+  let email = req.query.txtEmail;
+  let pwd = req.query.txtPwd;
+  let utype = req.query.utype;
 
-    mysqlServer.query(
-        "INSERT INTO users(emailid, pwd, utype, status, dos) values(?,?,?,?,current_date())",
-        [email, pwd, utype, 1],
-        function(err) {
-            if (err == null) {
-                // Prepare the welcome email
-                var mailOptions = {
-                    from: '"PlayGround" <bcacs2021155@gmail.com>',
-                    to: email,
-                    subject: "Welcome to Our Web Application!",
-                    html: `
-                        <div style="font-family: Arial, sans-serif; color: #333;">
-                            <h2>Welcome to Our Application!</h2>
-                            <p>Dear User,</p>
-                            <p>Thank you for signing up. We're excited to have you on board.</p>
-                            <p>Enjoy using our app!</p>
-                            <br>
-                            <p>Best regards,<br>PlayGround Team</p>
-                        </div>
-                    `
-                };
+  mysqlServer.query(
+    "INSERT INTO users(emailid, pwd, utype, status, dos) values(?,?,?,?,current_date())",
+    [email, pwd, utype, 1],
+    function(err) {
+      if (err == null) {
+        // INSERT success: send welcome email
+        var mailOptions = {
+          from: '"PlayGround" <bcacs2021155@gmail.com>',
+          to: email,
+          subject: "Welcome to Our Web Application!",
+          html: `
+            <div style="font-family: Arial, sans-serif; color: #333;">
+              <h2>Welcome to Our Application!</h2>
+              <p>Dear User,</p>
+              <p>Thank you for signing up. We're excited to have you on board.</p>
+              <p>Enjoy using our app!</p>
+              <br>
+              <p>Best regards,<br>PlayGround Team</p>
+            </div>
+          `
+        };
 
-                // Send the welcome email
-                transporter.sendMail(mailOptions, function(error, info) {
-                    if (error) {
-                        console.log("Email error:", error);
-                        resp.send("You are Signed Up! But the welcome email could not be sent.");
-                    } else {
-                        console.log("Email sent: " + info.response);
-                        resp.send("You are Signed Up! A welcome email has been sent to your inbox.");
-                    }
-                });
-            } else {
-                resp.send(err.message);
-            }
+        transporter.sendMail(mailOptions, function(error, info) {
+          if (error) {
+            console.log("Email error:", error);
+            resp.send("You are Signed Up! But the welcome email could not be sent.");
+          } else {
+            console.log("Email sent: " + info.response);
+            resp.send("You are Signed Up! A welcome email has been sent to your inbox.");
+          }
+        });
+
+      } else {
+        // HANDLE DUPLICATE ENTRY
+        if (err.code === 'ER_DUP_ENTRY') {
+          resp.send("Already Taken");
+        } else {
+          // All other DB errors
+          console.error("DB error:", err);
+          resp.send("Server error: " + err.message);
         }
-    );
+      }
+    }
+  );
 });
-//-------------Check User Exists
-ctp.get("/check-user",function(req,resp)
-{
-    let email=req.query.txtEmail;
-    mysqlServer.query("select * from users where emailid=?",[email],function(err,jsonArray)
-    {
-        if(err!=null)
-        {
-            resp.send(err.message);
-        }
-        else
-        if(jsonArray.length==1)
-                resp.send("Already Taken");
-            else
-                resp.send("Available")
-    })
-
-})
 //------------------login
 ctp.get("/Login", function(req, resp) {
   let email = req.query.txtLogemail;

@@ -57,11 +57,11 @@
           let res=exp.test(email);
           if(res==true) {
             $("#validlog").addClass("alert1").removeClass("alert2");
-            $("#validlog").html("valid email");
+            $("#validlog").html("Valid Email");
             $("#loginbtn").prop("disabled",false);
           } else {
             $("#validlog").addClass("alert2").removeClass("alert1");
-            $("#validlog").html("invalid email");
+            $("#validlog").html("Invalid Email");
             $("#loginbtn").prop("disabled",true);
           }
         });
@@ -72,11 +72,11 @@
           let res=exp.test(email);
           if(res==true) {
             $("#validsignup").addClass("alert1").removeClass("alert2");
-            $("#validsignup").html("valid email");
+            $("#validsignup").html("Valid Email");
             $("#signupbtn").prop("disabled",false);
           } else {
             $("#validsignup").addClass("alert2").removeClass("alert1");
-            $("#validsignup").html("invalid email");
+            $("#validsignup").html("Invalid Email");
             $("#signupbtn").prop("disabled",true);
           }
         });
@@ -228,7 +228,7 @@
                         <input type="email" class="form-control" id="txtEmail" name="txtEmail" required>
                         <label for="floatingInput">Email address</label>
                       </div>
-                      <div class="alert1" role="alert" id="validsignup">Enter valid email</div>
+                      <div class="alert1" role="alert" id="validsignup">(Use your actual email. You will receive a WELCOME message.)</div>
                       <!-- SIGNUP Password -->
                       <div class="row mt-2">
                         <div class="form-floating col-11">
@@ -275,7 +275,7 @@
                         <input type="email" class="form-control" id="txtLogemail" name="txtLogemail" required>
                         <label for="floatingInput">Email address</label>
                       </div>
-                      <div class="alert1" role="alert" id="validlog">Enter valid email</div>
+                      <div class="alert1" role="alert" id="validlog">Enter Valid Email</div>
                       <!-- LOGIN Password -->
                       <div class="row">
                         <div class="form-floating col-11">
