@@ -2,6 +2,7 @@
   "dependencies": {
     "cloudinary": "^2.6.1",
     "express": "^4.21.2",
+    "express-basic-auth": "^1.2.1",
     "express-fileupload": "^1.5.1",
     "mysql2": "^3.14.1",
     "nodemailer": "^6.10.1",
@@ -24,6 +25,5 @@
   "bugs": {
     "url": "https://github.com/Romeo2410/Playground/issues"
   },
-  "homepage": "https://github.com/Romeo2410/Playground#readme",
-  "devDependencies": {}
+  "homepage": "https://github.com/Romeo2410/Playground#readme"
 }

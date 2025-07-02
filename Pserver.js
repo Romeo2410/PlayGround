@@ -3,6 +3,11 @@ var fileuploader=require("express-fileupload");
 var ctp=express();
 var mysql=require("mysql2");
 var nodemailer = require('nodemailer');
+var basicAuth = require('express-basic-auth');
+ctp.use('/admin', basicAuth({
+  users: { 'GurS': 'World=Gur' },  // you set the username/password here
+  challenge: true                    // this makes the browser show the popup
+}));
 ctp.use(express.static("public"));
 var cloudinary= require("cloudinary").v2;
 cloudinary.config({ 
