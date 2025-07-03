@@ -356,39 +356,140 @@ ctp.get("/fetch-all-users", function (req, resp) {
 ctp.post("/publish-tournaments", async function (req, resp) {
   try {
     var taareektime = req.body.Date.split("T");
-    console.log(taareektime);
     var taareek = taareektime[0];
-    console.log(taareek);
+
     let filenames = "";
-    if (req.files == null)//pic did't uploaded
-    {
+    if (req.files == null) {
       filenames = "nopic.jpg";
-    }
-    else {
+    } else {
       filenames = req.files.Image.name;
       let path12 = __dirname + "/public/uploads/" + filenames;
-      console.log(path12);
       req.files.Image.mv(path12);
-      //     saving ur file/pic on cloudinary server
       await cloudinary.uploader.upload(path12).then(function (result) {
-        filenames = result.url;   //will give u the url of ur pic on cloudinary server
-        console.log(filenames);
+        filenames = result.url;
       });
     }
     req.body.picpath = filenames;
-    mysqlServer.query("insert into tournaments values(?,?,?,?,?,?,?,?,?,?,?)", [null, req.body.Email, req.body.Game, req.body.Title, req.body.Entry, taareek, req.body.City, req.body.Location, req.body.Prizes, req.body.picpath, req.body.info], function (err) {
-      if (err == null)
-        resp.send("Tournament Published Successfully");
-      else {
-        console.log(err.message);
+
+    mysqlServer.query(
+      "insert into tournaments values(?,?,?,?,?,?,?,?,?,?,?)",
+      [
+        null,
+        req.body.Email,
+        req.body.Game,
+        req.body.Title,
+        req.body.Entry,
+        taareek,
+        req.body.City,
+        req.body.Location,
+        req.body.Prizes,
+        req.body.picpath,
+        req.body.info
+      ],
+      function (err) {
+        if (err == null) {
+          mysqlServer.query("select email from subscribers", function (err, result) {
+            if (err == null) {
+              if (result.length == 0) {
+                resp.send("Tournament Published Successfully (No subscribers to notify)");
+              } else {
+                let emails = result.map(row => row.email);
+
+                let htmlContent = `
+                  <h2>New Tournament: ${req.body.Title}</h2>
+                  <p><strong>Game:</strong> ${req.body.Game}</p>
+                  <p><strong>Date:</strong> ${taareek}</p>
+                  <p><strong>City:</strong> ${req.body.City}</p>
+                  <p><strong>Location:</strong> ${req.body.Location}</p>
+                  <p><strong>Entry Fee:</strong> ${req.body.Entry}</p>
+                  <p><strong>Prizes:</strong> ${req.body.Prizes}</p>
+                  <p>${req.body.info}</p>
+                  <p><img src="${req.body.picpath}" alt="Tournament Poster" width="300"></p>
+                  <p>Visit PlayGround to register.</p>
+                `;
+
+                let mailOptions = {
+                  from: '"PlayGround Team" <bcacs2021155@gmail.com>',
+                  bcc: emails,
+                  subject: `New Tournament Published: ${req.body.Title}`,
+                  html: htmlContent
+                };
+
+                transporter.sendMail(mailOptions, function (error, info) {
+                  if (error) {
+                    console.error(error);
+                    resp.send("Tournament Published Successfully (Error sending emails to subscribers)");
+                  } else {
+                    console.log("Emails sent: " + info.response);
+                    resp.send("Tournament Published Successfully and Subscribers Notified");
+                  }
+                });
+              }
+            } else {
+              console.error(err.message);
+              resp.send("Tournament Published, but error fetching subscribers");
+            }
+          });
+        } else {
+          console.error(err.message);
+          resp.send("Error publishing tournament");
+        }
       }
-    })
-  }
-  catch (err) {
+    );
+  } catch (err) {
     console.error("Server Error:", err);
-    resp.status(500).send("Server Error: " + err.message);
+    resp.send("Server Error: " + err.message);
   }
-})
+});
+
+ctp.post("/subscribeNewsletter", function(req, resp) {
+  const email = req.body.email;
+
+  if (!email) {
+    resp.send("Email is required.");
+    return;
+  }
+
+  mysqlServer.query("select * from subscribers where email=?", [email], function(err, result) {
+    if (err) {
+      console.error(err);
+      resp.send("Error checking subscription.");
+      return;
+    }
+
+    if (result.length > 0) {
+      resp.send("You are already subscribed.");
+      return;
+    }
+
+    mysqlServer.query("insert into subscribers values(?)", [email], function(err2) {
+      if (err2) {
+        console.error(err2);
+        resp.send("Error saving subscription.");
+        return;
+      }
+
+      const mailOptions = {
+        from: '"PlayGround Team" <bcacs2021155@gmail.com>',
+        to: email,
+        subject: "Welcome to PlayGround Newsletter",
+        html: `
+          <h2>Welcome to PlayGround!</h2>
+          <p>Thank you for subscribing to our newsletter. You'll now get updates about tournaments and more.</p>
+        `
+      };
+
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          console.error(error);
+          resp.send("Subscribed, but error sending welcome email.");
+        } else {
+          resp.send("Subscribed successfully. Welcome email sent.");
+        }
+      });
+    });
+  });
+});
 
 ctp.get("/fetch-city", function (req, resp) {
   mysqlServer.query("select distinct City from tournaments", function (err, jsonArray) {

@@ -55,6 +55,30 @@
         $("#txtLogpwd").prop("type", "password");
         $("#eyep").addClass("fa-eye-slash").removeClass("fa-eye");
       });
+// Newsletter Subscription AJAX
+$("#newsletterForm").submit(function(e) {
+  e.preventDefault();
+  const email = $("#newsletterEmail").val().trim();
+
+  if (email === "") {
+    alert("Please enter a valid email.");
+    return;
+  }
+
+  $.ajax({
+    type: "post",
+    url: "/subscribeNewsletter",
+    data: { email: email }
+  })
+  .done(function(response) {
+    alert(response);
+    $("#newsletterForm")[0].reset();
+  })
+  .fail(function(err) {
+    alert("Server error. Please try again later.");
+    console.error(err);
+  });
+});
       // Login email validation
       $("#txtLogemail").keyup(function () {
         let exp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -439,6 +463,23 @@
       </div>
     </div>
   </div>
+  <!-- Newsletter -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <h2 class="fw-bold mb-3 text-custom">Subscribe to our Newsletter</h2>
+      <p class="text-secondary-custom mb-4">Stay updated with the latest tournaments, events, and special offers.</p>
+      <form id="newsletterForm" class="row g-2 justify-content-center">
+  <div class="col-sm-8">
+    <input type="email" class="form-control" id="newsletterEmail" placeholder="Enter your email" required>
+  </div>
+  <div class="col-sm-auto">
+    <button type="submit" class="btn btn-custom mb-3 w-100">Subscribe</button>
+  </div>
+</form>
+    </div>
+  </div>
+</div>
   <!-- Footer -->
   <footer id="foot">
     <hr class="text-light">
