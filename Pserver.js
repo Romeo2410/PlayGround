@@ -462,7 +462,7 @@ ctp.post("/subscribeNewsletter", function(req, resp) {
       return;
     }
 
-    mysqlServer.query("insert into subscribers values(?)", [email], function(err2) {
+    mysqlServer.query("insert into subscribers (email) values(?)", [email], function(err2) {
       if (err2) {
         console.error(err2);
         resp.send("Error saving subscription.");
@@ -470,7 +470,7 @@ ctp.post("/subscribeNewsletter", function(req, resp) {
       }
 
       const mailOptions = {
-        from: '"PlayGround Team" <bcacs2021155@gmail.com>',
+        from: '"PlayGround" <bcacs2021155@gmail.com>',
         to: email,
         subject: "Welcome to PlayGround Newsletter",
         html: `
