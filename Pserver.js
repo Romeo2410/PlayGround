@@ -331,11 +331,11 @@ ctp.post("/update-data", async function (req, resp) {
   //save data acc to columns sequence
   mysqlServer.query("UPDATE organizations SET Organization = ?, contact = ?, address = ?, city = ?, proof = ?, propic = ?, sports = ?, prev = ?, website = ?, insta = ? WHERE emailid = ?",
     [bnda, Con, Address, city, ID, filename, Sports, PT, Site, Gram, mail], function (err) {
-    if (err == null)
-      resp.send("Record Updated Successfully");
-    else
-      resp.send(err.message);
-  })
+      if (err == null)
+        resp.send("Record Updated Successfully");
+      else
+        resp.send(err.message);
+    })
   // resp.send(req.body);
   //resp.send("U are Signedup with Id="+req.body.txtMail);
 })
@@ -562,11 +562,11 @@ ctp.post("/Modify-Details", async function (req, resp) {
   //resp.send(PT);
   mysqlServer.query("UPDATE players SET name = ?, games = ?, mobile = ?, dob = ?, gender = ?, address = ?, city = ?, idproof = ?, poster = ?, otherinfo = ? WHERE emailid = ?",
     [naam, Games, Con, Dob, Gender, Address, city, proof, filename, PT, mail], function (err) {
-    if (err == null)
-      resp.send("Record Updated Successfully");
-    else
-      resp.send(err.message);
-  })
+      if (err == null)
+        resp.send("Record Updated Successfully");
+      else
+        resp.send(err.message);
+    })
 })
 ctp.get("/fetch-player", function (req, resp) {
   let email = req.query.inputEmail;
@@ -634,31 +634,94 @@ ctp.get("/all-records", function (req, resp) {
 
 ctp.get("/doBlock", function (req, resp) {
   let userMail = req.query.emailKuch;
-  //col name Same as  table col name
-  mysqlServer.query("update users set status=0 where emailid=?", [userMail], function (err, result) {
-    if (err == null) {
-      if (result.affectedRows == 1)
-        resp.send("Status block Successfulllyyyy");
-      else
-        resp.send("Invalid User Id");
+
+  mysqlServer.query(
+    "UPDATE users SET status=0 WHERE emailid=?",
+    [userMail],
+    function (err, result) {
+      if (err == null) {
+        if (result.affectedRows == 1) {
+          // Prepare the email
+          const mailOptions = {
+            from: '"PlayGround" <bcacs2021155@gmail.com>',
+            to: userMail,
+            subject: "Your Free Trial Has Ended",
+            html: `
+              <div style="font-family: Arial, sans-serif; color: #333;">
+                <h2 style="color:#E74C3C;">Trial Ended</h2>
+                <p>Hello,</p>
+                <p>Your free trial period has now ended and your account has been temporarily blocked.</p>
+                <p>Please contact the service provider to resume your access.</p>
+                <br>
+                <p>Thank you,<br>PlayGround Team</p>
+              </div>
+            `
+          };
+
+          // Send the email
+          transporter.sendMail(mailOptions, function (mailErr, info) {
+            if (mailErr) {
+              console.error("Error sending block email:", mailErr);
+              resp.send("User blocked, but email could not be sent.");
+            } else {
+              console.log("Block email sent:", info.response);
+              resp.send("User blocked successfully and email sent.");
+            }
+          });
+        } else {
+          resp.send("Invalid User Id");
+        }
+      } else {
+        resp.send(err.message);
+      }
     }
-    else
-      resp.send(err.message);
-  })
-})
+  );
+});
+
 
 //-----------RESUME USER---------------------------
 ctp.get("/Resume", function (req, resp) {
   let userMail = req.query.emailKuch;
-  //col name Same as  table col name
-  mysqlServer.query("update users set status=1 where emailid=?", [userMail], function (err, result) {
-    if (err == null) {
-      if (result.affectedRows == 1)
-        resp.send("Status Resume Successfulllyyyy");
-      else
-        resp.send("Invalid User Id");
+
+  mysqlServer.query(
+    "UPDATE users SET status=1 WHERE emailid=?",
+    [userMail],
+    function (err, result) {
+      if (err == null) {
+        if (result.affectedRows == 1) {
+          // Prepare the resume/reactivation email
+          const mailOptions = {
+            from: '"PlayGround" <bcacs2021155@gmail.com>',
+            to: userMail,
+            subject: "Your Account Has Been Reactivated",
+            html: `
+              <div style="font-family: Arial, sans-serif; color: #333;">
+                <h2 style="color:#2ECC71;">Account Reactivated</h2>
+                <p>Hello,</p>
+                <p>Your account has been successfully reactivated. You now have access to all services again.</p>
+                <p>If you have any questions, please contact support.</p>
+                <br>
+                <p>Thank you,<br>PlayGround Team</p>
+              </div>
+            `
+          };
+
+          // Send the email
+          transporter.sendMail(mailOptions, function (mailErr, info) {
+            if (mailErr) {
+              console.error("Error sending resume email:", mailErr);
+              resp.send("User resumed, but email could not be sent.");
+            } else {
+              console.log("Resume email sent:", info.response);
+              resp.send("User resumed successfully and email sent.");
+            }
+          });
+        } else {
+          resp.send("Invalid User Id");
+        }
+      } else {
+        resp.send(err.message);
+      }
     }
-    else
-      resp.send(err.message);
-  })
-})
+  );
+});
