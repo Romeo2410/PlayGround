@@ -38,47 +38,49 @@
 
     $(document).ready(function () {
       // Password eye Signup
-      $("#eye").mousedown(function () {
-        $("#txtPwd").prop("type", "text");
-        $("#eye").addClass("fa-eye").removeClass("fa-eye-slash");
-      });
-      $("#eye").mouseup(function () {
-        $("#txtPwd").prop("type", "password");
-        $("#eye").addClass("fa-eye-slash").removeClass("fa-eye");
+      $("#eye").click(function () {
+        if ($("#txtPwd").prop("type") === "password") {
+          $("#txtPwd").prop("type", "text");
+          $("#eye").addClass("fa-eye").removeClass("fa-eye-slash");
+        } else {
+          $("#txtPwd").prop("type", "password");
+          $("#eye").addClass("fa-eye-slash").removeClass("fa-eye");
+        }
       });
       // Password eye Login
-      $("#eyep").mousedown(function () {
-        $("#txtLogpwd").prop("type", "text");
-        $("#eyep").addClass("fa-eye").removeClass("fa-eye-slash");
+      $("#eyep").click(function () {
+        if ($("#txtLogpwd").prop("type") === "password") {
+          $("#txtLogpwd").prop("type", "text");
+          $("#eyep").addClass("fa-eye").removeClass("fa-eye-slash");
+        } else {
+          $("#txtLogpwd").prop("type", "password");
+          $("#eyep").addClass("fa-eye-slash").removeClass("fa-eye");
+        }
       });
-      $("#eyep").mouseup(function () {
-        $("#txtLogpwd").prop("type", "password");
-        $("#eyep").addClass("fa-eye-slash").removeClass("fa-eye");
+      // Newsletter Subscription AJAX
+      $("#newsletterForm").submit(function (e) {
+        e.preventDefault();
+        const email = $("#newsletterEmail").val().trim();
+
+        if (email === "") {
+          alert("Please enter a valid email.");
+          return;
+        }
+
+        $.ajax({
+          type: "post",
+          url: "/subscribeNewsletter",
+          data: { email: email }
+        })
+          .done(function (response) {
+            alert(response);
+            $("#newsletterForm")[0].reset();
+          })
+          .fail(function (err) {
+            alert("Server error. Please try again later.");
+            console.error(err);
+          });
       });
-// Newsletter Subscription AJAX
-$("#newsletterForm").submit(function(e) {
-  e.preventDefault();
-  const email = $("#newsletterEmail").val().trim();
-
-  if (email === "") {
-    alert("Please enter a valid email.");
-    return;
-  }
-
-  $.ajax({
-    type: "post",
-    url: "/subscribeNewsletter",
-    data: { email: email }
-  })
-  .done(function(response) {
-    alert(response);
-    $("#newsletterForm")[0].reset();
-  })
-  .fail(function(err) {
-    alert("Server error. Please try again later.");
-    console.error(err);
-  });
-});
       // Login email validation
       $("#txtLogemail").keyup(function () {
         let exp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
